@@ -16,7 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-function runGame() {}
+
+/**
+ * The main game "loop", called when the script is first loaded and after the user's answer has been processed
+ */ //this is a function comment which allows to view comment when hovering over the function name
+function runGame() {
+  let num1 = Math.floor(Math.random() * 25) + 1;
+  let num2 = Math.floor(Math.random() * 25) + 1;
+}
 
 function checkAnswer() {}
 
