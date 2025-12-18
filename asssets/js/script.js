@@ -37,6 +37,8 @@ function runGame(gameType) {
 
   let num1 = Math.floor(Math.random() * 25) + 1;
   let num2 = Math.floor(Math.random() * 25) + 1;
+  let dividend1 = Math.floor(Math.random() * 250) + 1;
+  let dividend2 = Math.floor(Math.random() * 250) + 1;
 
   if (gameType === "addition") {
     displayAdditionQuestions(num1, num2);
@@ -44,6 +46,8 @@ function runGame(gameType) {
     displayMultiplyQuestions(num1, num2);
   } else if (gameType === "subtract") {
     displaySubtractQuestions(num1, num2);
+  } else if (gameType === "division") {
+    displayDivisionQuestions(dividend1, dividend2);
   } else {
     alert(`Unknown game type: ${gameType}`);
     throw `Unknown game type: ${gameType}. Aborting!`;
@@ -84,6 +88,8 @@ function calculateCorrectAnswer() {
     return [operand1 * operand2, "multiply"];
   } else if (operator === "-") {
     return [operand1 - operand2, "subtract"];
+  } else if (operator === "/") {
+    return [operand1 / operand2, "division"];
   } else {
     alert(`Unimplemented operator ${operator}`);
     throw `Unimplemented operator ${operator}. Aborting!`;
@@ -128,4 +134,50 @@ function displayMultiplyQuestions(operand1, operand2) {
   document.getElementById("operand1").textContent = operand1;
   document.getElementById("operand2").textContent = operand2;
   document.getElementById("operator").textContent = "x";
+}
+
+function displayDivisionQuestions(operand1, operand2) {
+  if (operand1 >= operand2) {
+    console.log("here", operand1);
+    if (operand1 % operand2 === 0) {
+      document.getElementById("operand1").textContent = operand1;
+      document.getElementById("operand2").textContent = operand2;
+    } else {
+      //loop maybe through the top of operand 1 and for each iteration check if you get a whole number
+      for (let i = operand1 - 1; i > 0; i--) {
+        if (operand1 % i !== 0) {
+          continue;
+        } else {
+          document.getElementById("operand1").textContent = operand1;
+          document.getElementById("operand2").textContent = i;
+          break; //stops loops instead of choosing the final iteration always chooses the first
+        }
+      }
+    }
+  } else {
+    if (operand2 % operand1 === 0) {
+      document.getElementById("operand1").textContent = operand2;
+      document.getElementById("operand2").textContent = operand1;
+    } else {
+      for (let i = operand2 - 1; i > 0; i--) {
+        if (operand2 % i !== 0) {
+          continue;
+        } else {
+          document.getElementById("operand1").textContent = operand2;
+          document.getElementById("operand2").textContent = i;
+          break;
+        }
+      }
+    }
+  }
+  document.getElementById("operator").textContent = "/";
+
+  /* 
+  ALTERNATIVELY DO: smaller number becomes the quotient and multiply by this so that you are sure you can always get whole number
+ 
+    operand1 = operand1 * operand2;
+    document.getElementById("operand1").textContent = operand1;
+    document.getElementById("operand2").textContent = operand2;
+    document.getElementById("operator").textContent = "/";
+  */
 }
