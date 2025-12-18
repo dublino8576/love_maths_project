@@ -42,11 +42,14 @@ function checkAnswer() {
 
   if (isCorrect) {
     alert(`Hey! You got it right! :D`);
+    incrementScore();
   } else {
     alert(
       `AHHHHH..., you answered ${userAnswer}, the correct answer was ${calculateAnswer[0]}!`
     );
+    incrementWrongAnswer();
   }
+  //allows to run a new game of the same type
   runGame(calculateAnswer[1]);
 }
 
@@ -66,9 +69,18 @@ function calculateCorrectAnswer() {
   }
 }
 
-function incrementScore() {}
+/**
+ * gets the current score from the DOM and increments it by 1
+ */
+function incrementScore() {
+  let oldScore = parseInt(document.getElementById("score").innerText);
+  document.getElementById("score").innerText = ++oldScore;
+}
 
-function incrementWrongAnswer() {}
+function incrementWrongAnswer() {
+  let oldScore = parseInt(document.getElementById("incorrect").innerText);
+  document.getElementById("incorrect").innerText = ++oldScore;
+}
 
 /**
  *
