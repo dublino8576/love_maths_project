@@ -15,6 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+  //press enter to check answer
+  document
+    .getElementById("answer-box")
+    .addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        checkAnswer();
+      }
+    });
   runGame(gameType);
 });
 
@@ -22,6 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
  * The main game "loop", called when the script is first loaded and after the user's answer has been processed
  */ //this is a function comment which allows to view comment when hovering over the function name anywhere in the file without having to go to the function declaration
 function runGame(gameType) {
+  /* resets the value of input after each game run */
+  document.getElementById("answer-box").value = "";
+  /* every game the cursor will be ready to type in the answer box instead of manually having to redo it */
+  document.getElementById("answer-box").focus();
+
   let num1 = Math.floor(Math.random() * 25) + 1;
   let num2 = Math.floor(Math.random() * 25) + 1;
 
